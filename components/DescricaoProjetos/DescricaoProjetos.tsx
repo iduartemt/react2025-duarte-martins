@@ -10,7 +10,7 @@ export default function DescricaoProjetos() {
         que demonstram minhas habilidades em diferentes tecnologias web. 
         Você pode explorar todos os meus projetos na minha{" "}
         <a 
-          href="https://duarteverissimo-lusofona.github.io/" 
+          href="https://iduartemt.github.io/" 
           target="_blank" 
           rel="noopener noreferrer"
           className="text-blue-600 hover:text-blue-800 underline font-semibold"
@@ -24,17 +24,17 @@ export default function DescricaoProjetos() {
         
         <Projeto 
           nome="Loja Online"
-          url="https://duarteverissimo-lusofona.github.io/lab7/index.html"
+          url="https://iduartemt.github.io/Lab7/index.html"
         />
         
         <Projeto 
           nome="Site com JavaScript Interativo"
-          url="https://duarteverissimo-lusofona.github.io/lab5/index.html"
+          url="https://iduartemt.github.io/Lab5/index.html"
         />
         
         <Projeto 
-          nome="Portfolio Pessoal"
-          url="https://duarte-verissimo.github.io/"
+          nome="A minha cidade"
+          url="https://iduartemt.github.io/Lab3/index.html"
         />
       </div>
     </div>

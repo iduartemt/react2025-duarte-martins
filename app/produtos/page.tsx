@@ -159,8 +159,7 @@ export default function ProdutosPage() {
 
           {/* Total */}
           <div className="text-xl font-bold text-right">
-            Total: {cart.reduce((total, item) => total + item.price, 0).toFixed(2)} €
-          </div>
+Total: {cart.reduce((total, item) => total + Number(item.price), 0).toFixed(2)} €          </div>
 
           {/* Botão Comprar */}
           <button 

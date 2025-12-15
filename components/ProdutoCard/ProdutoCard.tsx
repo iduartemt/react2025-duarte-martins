@@ -1,24 +1,22 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Produto } from '@/models/interfaces';
 
 interface ProdutoCardProps {
   produto: Produto;
-  onAddToCart?: (produto: Produto) => void;     // Função opcional para adicionar
-  onRemoveFromCart?: () => void;                // Função opcional para remover
+  onAddToCart?: (produto: Produto) => void;
+  onRemoveFromCart?: () => void;
 }
 
 export default function ProdutoCard({ produto, onAddToCart, onRemoveFromCart }: ProdutoCardProps) {
   return (
     <div className="border border-gray-200 rounded-lg p-4 bg-white flex flex-col h-full hover:shadow-lg transition">
       <div className="relative w-full h-48 mb-4">
-        <Image
-          src={`https://deisishop.pythonanywhere.com${produto.image}`}
-          alt={produto.title}
-          fill
-          className="object-contain"
-        />
+        <img
+  src={`https://deisishop.pythonanywhere.com${produto.image}`} 
+  alt={produto.title} 
+  className="object-contain h-full w-full"
+/>
       </div>
       
       <h2 className="font-bold text-lg line-clamp-1">{produto.title}</h2>
@@ -26,7 +24,10 @@ export default function ProdutoCard({ produto, onAddToCart, onRemoveFromCart }: 
       
       <div className="mt-auto flex flex-col gap-2">
         <div className="flex justify-between items-center">
-          <span className="font-bold text-lg">{produto.price.toFixed(2)} €</span>
+          <span className="font-bold text-lg">
+            {Number(produto.price).toFixed(2)} €
+          </span>
+          
           <Link href={`/produtos/${produto.id}`}>
              <button className="bg-blue-600 text-white text-xs px-3 py-1 rounded hover:bg-blue-700 transition">
                + Info
@@ -34,9 +35,6 @@ export default function ProdutoCard({ produto, onAddToCart, onRemoveFromCart }: 
           </Link>
         </div>
 
-        {/* Lógica dos Botões: Mostra um ou outro dependendo da função recebida */}
-        
-        {/* Botão ADICIONAR (Se estiver na lista principal) */}
         {onAddToCart && (
           <button 
             onClick={() => onAddToCart(produto)}
@@ -46,7 +44,6 @@ export default function ProdutoCard({ produto, onAddToCart, onRemoveFromCart }: 
           </button>
         )}
 
-        {/* Botão REMOVER (Se estiver no carrinho) */}
         {onRemoveFromCart && (
           <button 
             onClick={onRemoveFromCart}
