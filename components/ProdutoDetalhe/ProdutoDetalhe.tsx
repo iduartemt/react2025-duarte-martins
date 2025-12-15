@@ -1,52 +1,54 @@
-import Link from 'next/link'
-import { Produto } from '@/models/interfaces'
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Produto } from '@/models/interfaces';
 
 interface ProdutoDetalheProps {
-  produto: Produto
+  produto: Produto;
 }
 
 export default function ProdutoDetalhe({ produto }: ProdutoDetalheProps) {
-
-  // Função para obter o URL correto da imagem
-  function getImageUrl(image: string): string {
-    // Se já começa com http, usa diretamente (mas corrige "https//" para "https://")
-    if (image.startsWith('http')) {
-      return image.replace('https//', 'https://')
-    }
-    // Se é relativo, adiciona o domínio
-    return `https://deisishop.pythonanywhere.com${image}`
-  }
-
-
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      {/* Botão voltar */}
-      <Link href="/produtos">
-        <button className="mb-4 text-blue-600 hover:underline">
-          ← Voltar à lista
-        </button>
-      </Link>
-      
-      {/* Imagem */}
-      <img 
-        src={getImageUrl(produto.image)} 
-        alt={produto.title} 
-        className="w-32 h-32 object-contain" 
-      />
-      
-      {/* Informações */}
-      <h1 className="text-3xl font-bold mb-2">{produto.title}</h1>
-      <p className="text-gray-500 mb-2">{produto.category}</p>
-      <p className="text-2xl text-green-600 font-bold mb-4">{produto.price}€</p>
-      
-      {/* Descrição (agora mostrada!) */}
-      <p className="text-gray-700 mb-4">{produto.description}</p>
-      
-      {/* Rating (agora mostrado!) */}
-      <div className="flex items-center gap-2">
-        <span className="text-yellow-500">⭐ {produto.rating.rate}</span>
-        <span className="text-gray-400">({produto.rating.count} avaliações)</span>
+    <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-sm border">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        {/* Coluna da Imagem */}
+        <div className="relative w-full h-96 bg-gray-50 rounded-lg">
+          <Image 
+             src={`https://deisishop.pythonanywhere.com${produto.image}`} 
+             alt={produto.title}
+             fill
+             className="object-contain p-4"
+          />
+        </div>
+
+        {/* Coluna dos Detalhes */}
+        <div className="flex flex-col justify-center">
+          <h1 className="text-3xl font-bold mb-2">{produto.title}</h1>
+          <p className="text-gray-500 capitalize mb-4 text-lg">{produto.category}</p>
+          
+          <div className="text-3xl font-bold text-blue-600 mb-6">
+            {produto.price.toFixed(2)} €
+          </div>
+
+          <p className="text-gray-700 leading-relaxed mb-6">
+            {produto.description}
+          </p>
+
+          <div className="flex items-center gap-2 mb-8 bg-yellow-50 p-3 rounded w-fit">
+            <span className="text-yellow-500 text-xl">★</span>
+            <span className="font-bold">{produto.rating.rate}</span>
+            <span className="text-gray-500 text-sm">({produto.rating.count} avaliações)</span>
+          </div>
+
+          {/* Botão Voltar */}
+          <Link href="/produtos">
+            <button className="bg-gray-800 text-white px-6 py-3 rounded hover:bg-gray-700 transition w-full md:w-auto">
+              Voltar à Loja
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
-  )
+  );
 }
